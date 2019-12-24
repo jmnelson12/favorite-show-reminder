@@ -21,6 +21,7 @@ npm start
 ```
 cd www
 npm install
+npm run build // may not need to do
 npm start
 ```
 
