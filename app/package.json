@@ -1,0 +1,38 @@
+{
+    "name": "favorite-show-reminder",
+    "version": "1.0.0",
+    "description": "Web app that keeps track of your favorite tv shows and new episode release dates for you",
+    "main": "dev-server.js",
+    "scripts": {
+        "start": "node dev-server.ts",
+        "dev": "nodemon dev-server.ts"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+ssh://git@github.com/jmnelson12/favorite-show-reminder.git"
+    },
+    "author": "Jacob Nelson",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/jmnelson12/favorite-show-reminder/issues"
+    },
+    "homepage": "https://github.com/jmnelson12/favorite-show-reminder#readme",
+    "dependencies": {
+        "axios": "^0.19.0",
+        "body-parser": "^1.19.0",
+        "dotenv": "^8.2.0",
+        "express": "^4.17.1",
+        "ts-node": "^8.5.4"
+    },
+    "devDependencies": {
+        "@types/cors": "^2.8.6",
+        "@types/express": "^4.17.2",
+        "@types/node": "^13.1.0",
+        "cors": "^2.8.5",
+        "nodemon": "^2.0.2",
+        "typescript": "^3.7.4"
+    },
+    "engines": {
+        "node": ">=10.x"
+    }
+}
