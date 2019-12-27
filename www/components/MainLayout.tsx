@@ -12,12 +12,12 @@ const pages = [
         link: "/"
     },
     {
-        name: "About",
-        link: "/about"
+        name: "Favorites",
+        link: "/favorites"
     }
 ];
 
-const Layout: React.FunctionComponent<Props> = ({
+const MainLayout: React.FunctionComponent<Props> = ({
     children,
     title = "Favorite Show Reminder"
 }) => (
@@ -80,4 +80,4 @@ const Layout: React.FunctionComponent<Props> = ({
         </>
     );
 
-export default Layout;
+export default MainLayout;

@@ -17,11 +17,16 @@
             "dest": "/app/routes/api"
         },
         {
+            "src": "/api/me/(.*)",
+            "dest": "/app/routes/api"
+        },
+        {
             "src": "/(.*)",
             "dest": "/www/$1"
         }
     ],
     "env": {
-        "TMDB_KEY": "@tmdb-key"
+        "TMDB_KEY": "@tmdb-key",
+        "MLAB_TASK_COLLECTION_URI": "@mlab-tasks-uri"
     }
 }

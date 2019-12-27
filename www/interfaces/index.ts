@@ -1,9 +1,9 @@
 export interface IMovie {
     popularity: number;
     voteCount: number;
-    posterPath: string;
+    poster_path: string;
     id: number;
-    backdropPath: string;
+    backdrop_path: string;
     genreIds: number[];
     title: string;
     voteAverage: number;
