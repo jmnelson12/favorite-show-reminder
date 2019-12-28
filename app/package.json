@@ -4,8 +4,8 @@
     "description": "Web app that keeps track of your favorite tv shows and new episode release dates for you",
     "main": "dev-server.js",
     "scripts": {
-        "start": "node dev-server.ts",
-        "dev": "nodemon dev-server.ts"
+        "start": "NODE_ENV=production node server.ts",
+        "dev": "nodemon server.ts"
     },
     "repository": {
         "type": "git",
@@ -20,15 +20,17 @@
     "dependencies": {
         "axios": "^0.19.0",
         "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
         "dotenv": "^8.2.0",
         "express": "^4.17.1",
+        "helmet": "^3.21.2",
         "ts-node": "^8.5.4"
     },
     "devDependencies": {
         "@types/cors": "^2.8.6",
         "@types/express": "^4.17.2",
+        "@types/helmet": "0.0.45",
         "@types/node": "^13.1.0",
-        "cors": "^2.8.5",
         "nodemon": "^2.0.2",
         "typescript": "^3.7.4"
     },

@@ -7,5 +7,9 @@ if (!env) {
 }
 
 export default {
-    TMDB_KEY: process.env.TMDB_KEY
+    TMDB_KEY: process.env.TMDB_KEY,
+    PORT: process.env.PORT,
+    api: {
+        prefix: '/api',
+    },
 }

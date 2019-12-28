@@ -3,7 +3,11 @@
     "name": "favorite-show-reminder",
     "builds": [
         {
-            "src": "app/routes/**/*.ts",
+            "src": "app/**/*.ts",
+            "use": "@now/node"
+        },
+        {
+            "src": "app/package.json",
             "use": "@now/node"
         },
         {
@@ -13,12 +17,8 @@
     ],
     "routes": [
         {
-            "src": "/api/tmdb/(.*)",
-            "dest": "/app/routes/api"
-        },
-        {
-            "src": "/api/me/(.*)",
-            "dest": "/app/routes/api"
+            "src": "/api/(.*)",
+            "dest": "/app/server.ts"
         },
         {
             "src": "/(.*)",

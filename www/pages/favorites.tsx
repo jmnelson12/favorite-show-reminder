@@ -31,7 +31,7 @@ const Favorites: NextPage<Props> = ({ foo }) => (
 
 Favorites.getInitialProps = async ({ req }) => {
     const baseUrl = absoluteUrl(req, 'localhost:8080');
-    const apiUrl = process.env.NODE_ENV === 'production' ? `${baseUrl}api/me/favorites` : 'http://localhost:8080/api/me/favorites';
+    const apiUrl = process.env.NODE_ENV === 'production' ? `${baseUrl}api/user/favorites` : 'http://localhost:8080/api/user/favorites';
 
     try {
         const { status, data } = await axios.get(apiUrl);
