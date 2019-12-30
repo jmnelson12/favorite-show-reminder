@@ -27,7 +27,7 @@ const MainLayout: React.FunctionComponent<Props> = ({
                 <meta charSet="utf-8" />
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
-            <main className="container">
+            <main>
                 <style jsx global>{`
                     html {
                         height: 100%;
@@ -57,6 +57,10 @@ const MainLayout: React.FunctionComponent<Props> = ({
                         padding: 0.5rem;
                         background-color: #efefef;
                         text-align: right;
+                    }
+                    nav {
+                        position: relative;
+                        z-index: 999;
                     }
                     nav img {
                         width: 50px;

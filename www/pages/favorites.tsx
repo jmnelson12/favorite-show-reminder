@@ -3,6 +3,7 @@ import axios from "axios";
 import url from "url";
 
 import MainLayout from "../components/MainLayout";
+import FavoriteShowsList from "../components/FavoriteShowsList";
 
 const absoluteUrl = (req: any, setLocalhost: any) => {
     let protocol = 'https'
@@ -20,12 +21,12 @@ const absoluteUrl = (req: any, setLocalhost: any) => {
 };
 
 type Props = {
-    foo: any
+    data: any
 };
 
-const Favorites: NextPage<Props> = ({ foo }) => (
+const Favorites: NextPage<Props> = ({ data }) => (
     <MainLayout title="Index Page">
-        <h1>Favorites Page</h1>
+        <FavoriteShowsList shows={data} />
     </MainLayout>
 );
 
@@ -36,12 +37,10 @@ Favorites.getInitialProps = async ({ req }) => {
     try {
         const { status, data } = await axios.get(apiUrl);
 
-        console.log({ status, data });
-
-        return { foo: "bar" };
+        return { data };
     } catch (ex) {
         console.error(`Error fetching data from ${apiUrl} - ${ex.message}`);
-        return { foo: "bar" };
+        return { data: [] };
     }
 };
 
