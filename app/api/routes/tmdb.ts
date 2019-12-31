@@ -27,6 +27,15 @@ const parseData = (data: any[], type: ShowType = ShowType.Blank): IShow[] => {
         } = d;
 
         const genres = getGenres(genre_ids);
+        let _type = type;
+
+        if (d.media_type) {
+            if (d.media_type === "tv") {
+                _type = ShowType.TV_Show;
+            } else if (d.media_type === "movie") {
+                _type = ShowType.Movie;
+            }
+        }
 
         results.push({
             popularity,
@@ -39,7 +48,7 @@ const parseData = (data: any[], type: ShowType = ShowType.Blank): IShow[] => {
             voteAverage,
             overview,
             releaseDate: releaseDate || first_air_date,
-            type
+            type: _type
         });
     });
 
@@ -54,10 +63,18 @@ const combineTopMoviesAndShows = (movies: IShow[] | null, tvShows: IShow[] | nul
     return combined.slice(0, limit);
 };
 
+const runSearch = async (query: string) => {
+    const { data: { results } } = await axios.get(`${TMDB_BASE_URL}/search/multi?api_key=${config.TMDB_KEY}&language=en-US&query=${query}&page=1`);
+
+    return results;
+};
+
 /** Movie Section */
 const getPopularMovies = async (page: number = 1): Promise<IShow[] | null> => {
     try {
-        const { data: { results } } = await axios.get(`${TMDB_BASE_URL}/discover/movie?api_key=${config.TMDB_KEY}&language=en-US&sort_by=popularity.desc&page=${page}`);
+        // const { data: { results } } = await axios.get(`${TMDB_BASE_URL}/discover/movie?api_key=${config.TMDB_KEY}&language=en-US&sort_by=popularity.desc&page=${page}`);
+        const { data: { results } } = await axios.get(`${TMDB_BASE_URL}/trending/movie/week?api_key=${config.TMDB_KEY}`);
+
         return parseData(results, ShowType.Movie);
     } catch (e) {
         return null;
@@ -83,12 +100,14 @@ const getMovie = async (id: number): Promise<IShow | null> => {
     } catch (e) {
         return null;
     }
-}
+};
 
 /** TV Show Section */
 const getPopularTVShows = async (page: number = 1): Promise<IShow[] | null> => {
     try {
-        const { data: { results } } = await axios.get(`${TMDB_BASE_URL}/tv/popular?api_key=${config.TMDB_KEY}&sort_by=popularity.desc&language=en-US&page=${page}`);
+        // const { data: { results } } = await axios.get(`${TMDB_BASE_URL}/tv/popular?api_key=${config.TMDB_KEY}&sort_by=popularity.desc&language=en-US&page=${page}`);
+        const { data: { results } } = await axios.get(`${TMDB_BASE_URL}/trending/tv/week?api_key=${config.TMDB_KEY}`);
+
         return parseData(results, ShowType.TV_Show);
     } catch (e) {
         return null;
@@ -114,7 +133,7 @@ const getTvShow = async (id: number): Promise<IShow | null> => {
     } catch (e) {
         return null;
     }
-}
+};
 
 
 export {
@@ -135,5 +154,17 @@ export default (app: Router) => {
         const topShows = combineTopMoviesAndShows(popularMovies, popularTVShows);
 
         res.status(200).json(topShows);
+    });
+
+    route.get('/search', async (req: Request, res: Response) => {
+        const { query }: { query: string } = req.query;
+
+        try {
+            const data = parseData(await runSearch(query));
+
+            res.status(200).json(data);
+        } catch (e) {
+            res.status(501).json('Error! Couldn\'t search movies and tv shows :(');
+        }
     });
 };

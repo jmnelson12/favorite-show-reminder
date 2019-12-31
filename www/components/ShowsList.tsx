@@ -38,7 +38,6 @@ const ShowsList: React.FunctionComponent<Props> = ({ shows }) => {
                 id,
                 type
             });
-            console.log(res);
 
         } catch (ex) {
             console.error(`Error fetching data from ${apiUrl} - ${ex.message}`);

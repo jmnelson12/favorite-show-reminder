@@ -48,6 +48,45 @@ const Index: NextPage<Props> = ({ shows }) => {
                 <ShowsList shows={_shows} />
             </div>
             <div id="main">
+                <div>
+                    <label htmlFor="search">Search:</label>
+                    <input type="text" name="search" id="search"/>
+                </div>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
+                <h1>Test</h1>
                 <h1>Test</h1>
             </div>
             <style jsx global>{`
@@ -84,7 +123,7 @@ const Index: NextPage<Props> = ({ shows }) => {
                 align-items: flex-end;
                 color: #fefefe;
                 text-shadow: 0px 0px 3px rgba(0,0,0,0.5);
-                padding: 45px;
+                padding: 35px;
                 padding-bottom: 65px;
             }
 
@@ -111,18 +150,44 @@ const Index: NextPage<Props> = ({ shows }) => {
             div.inner .left .titleWrapper h1 {
                 font-size: 3em;
             }
+            div.inner .left .favBtnWrapper button {
+                background-color: #007bff;
+                margin-top: 5px;
+                cursor: pointer;
+                color: #fff;
+                font-weight: 400;
+                text-align: center;
+                white-space: nowrap;
+                vertical-align: middle;
+                user-select: none;
+                border: 1px solid transparent;
+                padding: .375rem .75rem;
+                font-size: 1rem;
+                line-height: 1.5;
+                border-radius: .25rem;
+                transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+            }
+            div.inner .left .favBtnWrapper button:hover {
+                color: #fff;
+                background-color: #0069d9;
+                border-color: #0062cc;
+            }
 
             div.inner .right .text {
                 font-family: arial, sans-serif;
                 font-size: 16px;
                 line-height: 30px;
+                color: #ddd;
+                mix-blend-mode: difference;
             }
+
 
             #main {
                 position: relative;
                 z-index: 2;
                 background-color: #24292e;
                 display: flex;
+                flex-flow: column nowrap;
             }
 
             @media screen and (max-width: 945px){
