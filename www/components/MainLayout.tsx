@@ -29,42 +29,64 @@ const MainLayout: React.FunctionComponent<Props> = ({
             </Head>
             <main>
                 <style jsx global>{`
+                    @import url(//db.onlinewebfonts.com/c/dd4320757ff990fa3d23662f08aa6f3a?family=CentralW01);
+                    
                     html {
                         height: 100%;
                         box-sizing: border-box;
+                        font-family: "CentralW01", Arial, sans-serif;
                     }
                     
                     *,
                     *:before,
                     *:after {
                         box-sizing: inherit;
+                        margin: 0;
+                        padding: 0;
                     }
 
                     body { 
                         position: relative;
                         margin: 0;
-                        /* padding-bottom: 6rem;*/
+                        padding: 0;
                         min-height: 100%;
+                        background-color: #24292e;
                     }
                 `}</style>
 
                 <style jsx>{`
-                    footer {
-                        position: absolute;
-                        right: 0;
-                        bottom: 0;
-                        left: 0;
-                        padding: 0.5rem;
-                        background-color: #efefef;
-                        text-align: right;
-                    }
                     nav {
-                        position: relative;
+                        position: fixed;
+                        left: 0;
+                        top: 0;
+                        bottom: 0;
+                        height: 100%;
+                        display: flex;
+                        flex-flow: column nowrap;
                         z-index: 999;
+                        background-color: rgba(75,75,75,0.3);
+                        width: 125px;
                     }
                     nav img {
                         width: 50px;
                         height: 15px;
+                    }
+
+                    .container {
+                        padding-left: 125px;
+                    }
+
+                    @media screen and (max-width: 945px){
+                        nav {
+                            bottom: unset;
+                            right: 0;
+                            width: 100%;
+                            height: 35px;
+                            flex-flow: row wrap;
+                        }
+                        .container {
+                            padding: 0;
+                        }
                     }
                 `}</style>
 
@@ -78,8 +100,9 @@ const MainLayout: React.FunctionComponent<Props> = ({
                     }
                     <img src="/images/tmdb-rectangle-green.svg" alt="tmdb attribution" />
                 </nav>
-                {children}
-
+                <div className="container">
+                    {children}
+                </div>
             </main>
         </>
     );
