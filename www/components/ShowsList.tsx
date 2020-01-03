@@ -1,7 +1,8 @@
 import url from 'url';
 import * as React from 'react';
 import { IShow } from "../../interfaces";
-import axios from 'axios';
+
+import { postRequest } from "../utils/index";
 
 type Props = {
     shows: any
@@ -30,17 +31,13 @@ const ShowsList: React.FunctionComponent<Props> = ({ shows }) => {
      */
 
     const addToFavorites = async (id: number, type: string | undefined = "") => {
-        const baseUrl = absoluteUrl(null, 'localhost:8080');
-        const apiUrl = process.env.NODE_ENV === 'production' ? `${baseUrl}api/user/favorites` : 'http://localhost:8080/api/user/favorites';
-
         try {
-            const res = await axios.post(apiUrl, {
+            const res = await postRequest('api/user/favorites', {
                 id,
                 type
             });
-
         } catch (ex) {
-            console.error(`Error fetching data from ${apiUrl} - ${ex.message}`);
+            console.error(`${ex.message}`);
         }
     };
 
@@ -48,6 +45,7 @@ const ShowsList: React.FunctionComponent<Props> = ({ shows }) => {
         return (
             <div key={movie.id} className="show">
                 <img src={`https://image.tmdb.org/t/p/original${movie.backdropPath}`} className="backdrop" alt="backdrop path" />
+                <img src={`https://image.tmdb.org/t/p/w185${movie.posterPath}`} className="poster" alt="poster path" />
                 <div className="inner">
                     <div className="left">
                         <div className="genreList">

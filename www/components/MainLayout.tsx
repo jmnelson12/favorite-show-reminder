@@ -139,6 +139,10 @@ const MainLayout: React.FunctionComponent<Props> = ({
                             transform: translateY(-50%);
                         }
 
+                        nav hr {
+                            display: none;
+                        }
+
                         .container {
                             padding: 0;
                         }
@@ -153,10 +157,12 @@ const MainLayout: React.FunctionComponent<Props> = ({
                             </Link>
                         ))
                     }
-                    <hr />
-                    <Link href="#search">
-                        <a title="search">Search</a>
-                    </Link>
+                    <div className="otherLinks">
+                        <hr />
+                        <Link href="#search">
+                            <a title="search">Search</a>
+                        </Link>
+                    </div>
                     <img src="/images/tmdb-rectangle-green.svg" alt="tmdb attribution" />
                 </nav>
                 <div className="container">
