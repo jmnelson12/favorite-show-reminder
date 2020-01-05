@@ -1,7 +1,18 @@
 import { Request, Response, NextFunction } from 'express';
+import { findUserByQuery } from '../../controllers/user';
 
-export default (req: Request, res: Response, next: NextFunction) => {
-    console.log('!!!!!!!!!! running auth check !!!!!!!!!!');
+export default async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const { token } = req.headers;
+        const user = await findUserByQuery({ token });
 
-    next();
+        if (user) {
+            res.locals.user = user;
+            next();
+        } else {
+            throw "";
+        }
+    } catch (e) {
+        res.status(403).json({ success: false, message: "Unauthorized" });
+    }
 }
