@@ -28,7 +28,6 @@
     "env": {
         "TMDB_KEY": "@tmdb-key",
         "MLAB_TASK_COLLECTION_URI": "@mlab-tasks-uri",
-        "JWT_SECRET": "@jwt-secret",
         "PORT": "@port",
         "PROD_WHITELIST": "@prod-whitelist",
         "AGENDASH_USER": "@agendash-user",

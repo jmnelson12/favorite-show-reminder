@@ -6,7 +6,7 @@ import dependencyInjectorLoader from './dependencyInjector';
 
 export default async ({ server }: { server: express.Application }) => {
     const mongoConnection = await mongooseLoader();
-    console.log('DB loaded and connected...');
+    console.log('DB\'s loaded and connected...');
 
     const { agenda } = await dependencyInjectorLoader({
         mongoConnection

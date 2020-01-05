@@ -1,8 +1,9 @@
 import dotenv from 'dotenv';
+import path from 'path';
 
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
-const env = dotenv.config();
+const env = dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 if (!env) {
     throw new Error("Couldn't find .env file");
 }
@@ -20,7 +21,6 @@ export default {
     api: {
         prefix: '/api',
     },
-    jwtSecret: process.env.JWT_SECRET,
     whitelist: process.env[_whitelist]?.split(','),
     agenda: {
         dbCollection: process.env.AGENDA_DB_COLLECTION,

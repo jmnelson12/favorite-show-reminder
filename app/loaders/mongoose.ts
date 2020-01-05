@@ -8,5 +8,5 @@ export default async () => {
         useUnifiedTopology: true
     });
 
-    return connection.db;
+    return connection.db
 };
