@@ -1,4 +1,3 @@
-
 const { PHASE_PRODUCTION_SERVER } =
     process.env.NODE_ENV === 'development'
         ? {} // We're never in "production server" phase when in development mode

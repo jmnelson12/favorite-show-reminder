@@ -2,6 +2,7 @@ import { NextPage } from "next";
 import * as React from 'react';
 import { IShow } from "../../interfaces";
 import { getPopular, runSearch } from '../api/tmdb';
+import { scrollToRef } from "../utils";
 
 import MainLayout from "../components/MainLayout";
 import ShowsList from "../components/ShowsList";
@@ -15,6 +16,7 @@ const Index: NextPage<Props> = ({ shows }) => {
     const [_shows, setShows] = React.useState<IShow[]>(shows);
     const [searchList, setSearchList] = React.useState<IShow[]>([]);
     const [resultsFound, setResultsFound] = React.useState<boolean>(true);
+    const searchResultsRefEl = React.useRef(null);
 
     React.useEffect(() => {
         const interval = setInterval(() => {
@@ -36,6 +38,7 @@ const Index: NextPage<Props> = ({ shows }) => {
 
             setResultsFound(areData)
             setSearchList(areData ? data : []);
+            scrollToRef(searchResultsRefEl);
         }
     };
 
@@ -121,10 +124,11 @@ const Index: NextPage<Props> = ({ shows }) => {
 
                     .showsList div.inner .left .genreList p {
                         float: left;
-                        font-size: 14px;
+                        font-size: 16px;
                         border-radius: 3px 5px;
                         margin: 5px;
                         color: #FFF;
+                        font-weight: bold;
                     }
 
                     .showsList div.inner .left .genreList p:first-of-type {
@@ -168,7 +172,7 @@ const Index: NextPage<Props> = ({ shows }) => {
                     }
                 `}</style>
             </div>
-            <div id="main">
+            <div id="main" ref={searchResultsRefEl}>
                 <Search callback={handleSearch} />
                 {searchList.length !== 0 && (
                     <>
@@ -179,8 +183,6 @@ const Index: NextPage<Props> = ({ shows }) => {
                 )}
                 {!resultsFound && <h2 className="noResults">No Results Found</h2>}
                 <style jsx global>{`
-                    @import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
-
                     .noResults {
                         text-align: center;
                         color: #FFF;

@@ -30,6 +30,10 @@
         "MLAB_TASK_COLLECTION_URI": "@mlab-tasks-uri",
         "JWT_SECRET": "@jwt-secret",
         "PORT": "@port",
-        "PROD_WHITELIST": "@prod-whitelist"
+        "PROD_WHITELIST": "@prod-whitelist",
+        "AGENDASH_USER": "@agendash-user",
+        "AGENDASH_PWORD": "@agendash-pword",
+        "AGENDA_DB_COLLECTION": "@agenda-db-collection",
+        "AGENDA_CONCURRENCY": "@agenda-concurrency"
     }
 }

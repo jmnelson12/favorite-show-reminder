@@ -2,6 +2,7 @@ import * as React from 'react';
 import Link from "next/link";
 import Head from 'next/head'
 import { useRouter } from "next/router";
+import "../public/styles/index.css";
 
 type Props = {
     title?: string
@@ -32,13 +33,13 @@ const MainLayout: React.FunctionComponent<Props> = ({
                 <meta name="viewport" content="initial-scale=1.0, width=device-width" />
             </Head>
             <main>
-                <style jsx global>{`
-                    @import url(//db.onlinewebfonts.com/c/dd4320757ff990fa3d23662f08aa6f3a?family=CentralW01);
-                    
+                <style jsx global>{`    
+                    @import url('https://fonts.googleapis.com/css?family=Ubuntu|Nunito&display=swap');
+
                     html {
                         height: 100%;
                         box-sizing: border-box;
-                        font-family: "CentralW01", Arial, sans-serif;
+                        font-family: "Nunito", Arial, sans-serif;
                     }
                     
                     *,
@@ -86,7 +87,8 @@ const MainLayout: React.FunctionComponent<Props> = ({
                         line-height: 38px;
                         width: 100%;    
                         font-size: 18px;             
-                        padding-left: 15px    
+                        padding-left: 15px;    
+                        font-weight: bold;
                     }
 
                     nav a.active {

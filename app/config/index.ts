@@ -10,12 +10,25 @@ if (!env) {
 const isDev = process.env.NODE_ENV !== 'production';
 const _whitelist = isDev ? 'DEV_WHITELIST' : 'PROD_WHITELIST';
 
+const concurrency: string = process.env.AGENDA_CONCURRENCY || "2";
+const dbURL: string = process.env.MLAB_TASK_COLLECTION_URI || "";
+
 export default {
     TMDB_KEY: process.env.TMDB_KEY,
     PORT: process.env.PORT,
+    databaseURL: dbURL,
     api: {
         prefix: '/api',
     },
     jwtSecret: process.env.JWT_SECRET,
-    whitelist: process.env[_whitelist]?.split(',')
+    whitelist: process.env[_whitelist]?.split(','),
+    agenda: {
+        dbCollection: process.env.AGENDA_DB_COLLECTION,
+        pooltime: process.env.AGENDA_POOL_TIME,
+        concurrency: parseInt(concurrency, 10),
+    },
+    agendash: {
+        user: process.env.AGENDASH_USER || "admin",
+        password: process.env.AGENDASH_PWORD || "password"
+    }
 }

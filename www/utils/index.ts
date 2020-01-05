@@ -42,3 +42,9 @@ export const postRequest = async (url: string, body: any, req: any = null) => {
         return { data: null }
     }
 };
+
+export const scrollToRef = (ref: any) => {
+    if (window) {
+        window.scrollTo(0, ref.current.offsetTop);
+    }
+}
