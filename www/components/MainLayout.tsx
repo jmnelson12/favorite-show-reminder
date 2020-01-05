@@ -2,7 +2,6 @@ import * as React from 'react';
 import Link from "next/link";
 import Head from 'next/head'
 import { useRouter } from "next/router";
-import "../public/styles/index.css";
 
 type Props = {
     title?: string
