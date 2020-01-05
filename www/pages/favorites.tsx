@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { getFavorites } from '../api/user';
+import { getFavorites } from '../api/favorites';
 
 import MainLayout from "../components/MainLayout";
 import FavoriteShowsList from "../components/FavoriteShowsList";
