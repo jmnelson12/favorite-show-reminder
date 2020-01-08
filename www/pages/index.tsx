@@ -2,7 +2,6 @@ import { NextPage } from "next";
 import * as React from 'react';
 import { IShow } from "../../interfaces";
 import { getPopular, runSearch } from '../api/tmdb';
-import { verify } from '../api/user';
 import { scrollToRef } from "../utils";
 
 import MainLayout from "../components/MainLayout";
@@ -284,10 +283,9 @@ const Index: NextPage<Props> = ({ shows }) => {
     )
 };
 
-Index.getInitialProps = async ({ req }) => {
+Index.getInitialProps = async (ctx) => {
     try {
-        const data = await getPopular(req);
-        const verified = await verify();
+        const data = await getPopular(ctx.req);
 
         return { shows: data };
     } catch (ex) {

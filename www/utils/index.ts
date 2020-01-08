@@ -27,8 +27,8 @@ export const getRequest = async (url: string, req: any = null, options?: any) =>
 
         return { status, data };
     } catch (ex) {
-        console.error(`Error fetching data from ${url} - ${ex.message}`);
-        return { data: null }
+        // console.error(`Error fetching data from ${url} - ${ex.message}`);
+        return ex.response;
     }
 };
 
@@ -38,8 +38,8 @@ export const postRequest = async (url: string, body: any, req: any = null, optio
 
         return { status, data };
     } catch (ex) {
-        console.error(`Error fetching data from ${url} - ${ex.message}`);
-        return { data: null }
+        // console.error(`Error posting data to ${url} - ${ex.message}`);
+        return ex.response;
     }
 };
 

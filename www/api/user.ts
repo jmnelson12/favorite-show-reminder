@@ -7,8 +7,17 @@ export async function register() {
 export async function login() {
     const endpoint = 'api/user/login';
 };
-export async function verify(token?: string) {
+export async function verify(ctx: any, token: string = '') {
     const endpoint = 'api/user/verify';
+
+    if (!token) {
+        return false;
+    }
+
+    const isVerified = await getRequest(endpoint, null, { headers: { token } });
+
+    console.log('verifying...');
+    console.log({ isVerified });
 };
 export async function logout() {
     const endpoint = 'api/user/logout';

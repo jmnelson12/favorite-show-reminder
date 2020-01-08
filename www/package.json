@@ -19,11 +19,14 @@
     "homepage": "https://github.com/jmnelson12/favorite-show-reminder#readme",
     "dependencies": {
         "axios": "^0.19.0",
+        "js-cookie": "^2.2.1",
         "next": "^9.1.6",
+        "next-cookies": "^2.0.3",
         "react": "^16.12.0",
         "react-dom": "^16.12.0"
     },
     "devDependencies": {
+        "@types/js-cookie": "^2.2.4",
         "@types/node": "^13.1.0",
         "@types/react": "^16.9.17",
         "typescript": "^3.7.4"

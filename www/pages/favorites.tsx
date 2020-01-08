@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import Router from 'next/router';
 import { getFavorites } from '../api/favorites';
 
 import MainLayout from "../components/MainLayout";
@@ -16,7 +17,13 @@ const Favorites: NextPage<Props> = ({ data }) => (
 
 Favorites.getInitialProps = async ({ req }) => {
     try {
-        const data = await getFavorites(req);
+        const { data, status } = await getFavorites(req);
+
+        if (status !== 200) {
+            Router.push('/auth');
+            return { data: [] };
+        }
+
         return { data };
     } catch (ex) {
         return { data: [] };
