@@ -1,21 +1,12 @@
-import Router from 'next/router'
 import nextCookie from 'next-cookies'
 import cookie from "js-cookie";
 
-export const auth = ({ context, callback, serverRedirect }: { context: any, callback: Function, serverRedirect: string }) => {
-    const { token } = nextCookie(context)
+export const getToken = (ctx: any) => {
+    const { token } = nextCookie(ctx);
 
-    if (context.req && !token && serverRedirect) {
-        context.res.writeHead(302, { Location: serverRedirect })
-        context.res.end()
-        return
-    }
+    console.log(nextCookie(ctx));
 
-    if (!token) {
-        callback()
-    }
-
-    return token
+    return token;
 }
 
 export const login = ({ token, cookieOptions, callback }: { token: string, cookieOptions: any, callback: Function }) => {

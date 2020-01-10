@@ -3,13 +3,14 @@ import * as React from 'react';
 import { IShow } from "../../interfaces";
 import { getPopular, runSearch } from '../api/tmdb';
 import { scrollToRef } from "../utils";
+import { verify } from '../api/user';
 
 import MainLayout from "../components/MainLayout";
 import ShowsList from "../components/ShowsList";
 import Search from '../components/Search';
 
 type Props = {
-    shows: any
+    shows: any;
 };
 
 const Index: NextPage<Props> = ({ shows }) => {
@@ -34,6 +35,7 @@ const Index: NextPage<Props> = ({ shows }) => {
     const handleSearch = async (query: string) => {
         if (query && query.trim().length >= 1) {
             const data = await runSearch(query);
+
             const areData = data && data.length !== 0;
 
             setResultsFound(areData)
@@ -283,9 +285,11 @@ const Index: NextPage<Props> = ({ shows }) => {
     )
 };
 
-Index.getInitialProps = async (ctx) => {
+Index.getInitialProps = async (context) => {
     try {
-        const data = await getPopular(ctx.req);
+        const data = await getPopular(context.req);
+        const isUser = await verify(context);
+        console.log({ isUser });
 
         return { shows: data };
     } catch (ex) {

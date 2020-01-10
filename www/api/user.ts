@@ -1,4 +1,5 @@
 import { getRequest, postRequest } from '../utils/index';
+import * as auth from '../utils/auth';
 const defaultErrorEnding = "Please refresh the page and try again.";
 
 export async function register() {
@@ -10,14 +11,25 @@ export async function login() {
 export async function verify(ctx: any, token: string = '') {
     const endpoint = 'api/user/verify';
 
-    if (!token) {
+    const loginOptions = {
+        token: "bWFpbEBqYWNvYm5lbHNvbi50ZWNo-b21515db-1986-4dfa-b018-26222b6fad41",
+        cookieOptions: { expires: 1 },
+        callback: () => { }
+    };
+    auth.login(loginOptions);
+
+    const _token = token ? token : auth.getToken(ctx);
+
+    if (!_token) {
         return false;
     }
 
-    const isVerified = await getRequest(endpoint, null, { headers: { token } });
+    const isVerified = await getRequest(endpoint, null, { headers: { token: _token } });
 
     console.log('verifying...');
     console.log({ isVerified });
+
+    return isVerified;
 };
 export async function logout() {
     const endpoint = 'api/user/logout';

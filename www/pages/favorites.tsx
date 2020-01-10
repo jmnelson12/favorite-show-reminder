@@ -6,7 +6,7 @@ import MainLayout from "../components/MainLayout";
 import FavoriteShowsList from "../components/FavoriteShowsList";
 
 type Props = {
-    data: any
+    data: any;
 };
 
 const Favorites: NextPage<Props> = ({ data }) => (
@@ -15,9 +15,9 @@ const Favorites: NextPage<Props> = ({ data }) => (
     </MainLayout>
 );
 
-Favorites.getInitialProps = async ({ req }) => {
+Favorites.getInitialProps = async (context) => {
     try {
-        const { data, status } = await getFavorites(req);
+        const { data, status } = await getFavorites(context.req);
 
         if (status !== 200) {
             Router.push('/auth');

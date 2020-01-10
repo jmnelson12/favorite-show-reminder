@@ -64,9 +64,10 @@ const combineTopMoviesAndShows = (movies: IShow[] | null, tvShows: IShow[] | nul
 };
 
 const runSearch = async (query: string) => {
-    const { data: { results } } = await axios.get(`${TMDB_BASE_URL}/search/multi?api_key=${config.TMDB_KEY}&language=en-US&query=${query}&page=1`);
+    const { data: { results: tvRes } } = await axios.get(`${TMDB_BASE_URL}/search/tv?api_key=${config.TMDB_KEY}&language=en-US&query=${query}&page=1`);
+    const { data: { results: movieRes } } = await axios.get(`${TMDB_BASE_URL}/search/movie?api_key=${config.TMDB_KEY}&language=en-US&query=${query}&page=1`);
 
-    return results;
+    return [...tvRes, ...movieRes];
 };
 
 /** Movie Section */

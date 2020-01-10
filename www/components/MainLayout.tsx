@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 type Props = {
     children: any;
     title?: string;
+    context?: any;
 };
 
 const pages = [
@@ -24,22 +25,6 @@ const MainLayout: React.FunctionComponent<Props> = ({
     title = "Favorite Show Reminder"
 }) => {
     const router = useRouter();
-    // const user = React.useState(null);
-
-    // React.useEffect(() => {
-    //     const fetchUser = async () => {
-    //         login({
-    //             token: "bWFpbEBqYWNvYm5lbHNvbi50ZWNo-b21515db-1986-4dfa-b018-26222b6fad41",
-    //             cookieOptions: { expires: 1 },
-    //             callback: () => {
-    //                 /*Router.push("/profile")*/
-    //             }
-    //         })
-
-    //         //const isVerified = await verify();
-    //     }
-    //     fetchUser();
-    // }, [user]);
 
     return (
         <>

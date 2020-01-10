@@ -42,10 +42,11 @@ const ShowsList: React.FunctionComponent<Props> = ({ shows }) => {
     };
 
     return shows?.map((movie: IShow) => {
+        const posterPath = movie.posterPath ? `https://image.tmdb.org/t/p/w185${movie.posterPath}` : "/images/default-movie.png"
         return (
             <div key={movie.id} className="show">
                 <img src={`https://image.tmdb.org/t/p/original${movie.backdropPath}`} className="backdrop" alt="backdrop path" />
-                <img src={`https://image.tmdb.org/t/p/w185${movie.posterPath}`} className="poster" alt="poster path" />
+                <img src={posterPath} className="poster" alt="poster path" />
                 <div className="inner">
                     <div className="left">
                         <div className="genreList">
