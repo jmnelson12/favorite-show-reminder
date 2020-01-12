@@ -9,9 +9,8 @@ export const getToken = (ctx: any) => {
     return token;
 }
 
-export const login = ({ token, cookieOptions, callback }: { token: string, cookieOptions: any, callback: Function }) => {
+export const login = ({ token, cookieOptions }: { token: string, cookieOptions: any }) => {
     cookie.set('token', token, cookieOptions);
-    callback();
 };
 
 export const logout = (callback: Function) => {

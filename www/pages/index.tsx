@@ -122,6 +122,8 @@ const Index: NextPage<Props> = ({ shows }) => {
                         background-color: rgba(0,0,0,0.9);
                         padding: 15px;
                         border-radius: 10px;
+                        max-height: 100%;
+                        overflow: auto;
                     }
 
                     .showsList div.inner .left .genreList p {
@@ -288,8 +290,8 @@ const Index: NextPage<Props> = ({ shows }) => {
 Index.getInitialProps = async (context) => {
     try {
         const data = await getPopular(context.req);
-        const isUser = await verify(context);
-        console.log({ isUser });
+        // const isUser = await verify(context);
+        // console.log({ isUser });
 
         return { shows: data };
     } catch (ex) {

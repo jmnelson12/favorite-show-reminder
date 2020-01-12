@@ -11,12 +11,11 @@ export async function login() {
 export async function verify(ctx: any, token: string = '') {
     const endpoint = 'api/user/verify';
 
-    const loginOptions = {
-        token: "bWFpbEBqYWNvYm5lbHNvbi50ZWNo-b21515db-1986-4dfa-b018-26222b6fad41",
-        cookieOptions: { expires: 1 },
-        callback: () => { }
-    };
-    auth.login(loginOptions);
+    // const loginOptions = {
+    //     token: "bWFpbEBqYWNvYm5lbHNvbi50ZWNo-b21515db-1986-4dfa-b018-26222b6fad41",
+    //     cookieOptions: { expires: 1 }
+    // };
+    // auth.login(loginOptions);
 
     const _token = token ? token : auth.getToken(ctx);
 
@@ -25,9 +24,6 @@ export async function verify(ctx: any, token: string = '') {
     }
 
     const isVerified = await getRequest(endpoint, null, { headers: { token: _token } });
-
-    console.log('verifying...');
-    console.log({ isVerified });
 
     return isVerified;
 };

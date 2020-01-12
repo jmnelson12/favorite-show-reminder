@@ -13,7 +13,7 @@ export const absoluteUrl = (req: any, setLocalhost: any) => {
         protocol,
         host,
         pathname: '/' // req.url
-    })
+    });
 };
 
 const getCallUrl = (url: string, req: any = null): string => {
@@ -43,8 +43,12 @@ export const postRequest = async (url: string, body: any, req: any = null, optio
     }
 };
 
-export const scrollToRef = (ref: any) => {
+export const scrollToRef = (ref: any): void => {
     if (window) {
         window.scrollTo(0, ref.current.offsetTop);
     }
+}
+
+export const trimStringBasedOnWords = (str: string, trimAfter: number = 15): string => {
+    return str.split(' ').slice(0, trimAfter).join(' ').concat('...');
 }

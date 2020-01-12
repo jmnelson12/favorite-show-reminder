@@ -11,7 +11,20 @@ type Props = {
 
 const Favorites: NextPage<Props> = ({ data }) => (
     <MainLayout title="Index Page">
-        <FavoriteShowsList shows={data} />
+        <div className="container">
+            <FavoriteShowsList shows={data} />
+            <style jsx>{`
+                .container {
+                    padding: 25px;
+                }
+
+                @media screen and (max-width: 945px) {                    
+                    .container {
+                        padding: 85px 30px;
+                    }
+                }
+            `}</style>
+        </div>
     </MainLayout>
 );
 

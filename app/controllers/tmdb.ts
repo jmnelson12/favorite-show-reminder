@@ -29,13 +29,7 @@ const parseData = (data: any[], type: ShowType = ShowType.Blank): IShow[] => {
         const genres = getGenres(genre_ids);
         let _type = type;
 
-        if (d.media_type) {
-            if (d.media_type === "tv") {
-                _type = ShowType.TV_Show;
-            } else if (d.media_type === "movie") {
-                _type = ShowType.Movie;
-            }
-        }
+        _type = first_air_date ? ShowType.TV_Show : ShowType.Movie;
 
         results.push({
             popularity,
