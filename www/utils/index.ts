@@ -43,6 +43,17 @@ export const postRequest = async (url: string, body: any, req: any = null, optio
     }
 };
 
+export const deleteRequest = async (url: string, req: any = null, options?: any) => {
+    try {
+        const { status, data } = await axios.delete(getCallUrl(url, req), options);
+
+        return { status, data };
+    } catch (ex) {
+        // console.error(`Error posting data to ${url} - ${ex.message}`);
+        return ex.response;
+    }
+};
+
 export const scrollToRef = (ref: any): void => {
     if (window) {
         window.scrollTo(0, ref.current.offsetTop);

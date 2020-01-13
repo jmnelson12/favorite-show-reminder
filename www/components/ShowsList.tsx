@@ -1,26 +1,10 @@
-import url from 'url';
 import * as React from 'react';
 import { IShow } from "../../interfaces";
 
-import { postRequest } from "../utils/index";
+import { addToFavorites } from '../api/favorites';
 
 type Props = {
     shows: any
-};
-
-const absoluteUrl = (req: any, setLocalhost: any) => {
-    let protocol = 'https'
-    let host = req ? req.headers.host : window.location.hostname
-    if (host.indexOf('localhost') > -1) {
-        if (setLocalhost) host = setLocalhost
-        protocol = 'http'
-    }
-
-    return url.format({
-        protocol,
-        host,
-        pathname: '/' // req.url
-    })
 };
 
 const ShowsList: React.FunctionComponent<Props> = ({ shows }) => {
@@ -29,17 +13,6 @@ const ShowsList: React.FunctionComponent<Props> = ({ shows }) => {
      * "w92", "w154", "w185", "w342", "w500", "w780", or "original"
      * 
      */
-
-    const addToFavorites = async (id: number, type: string | undefined = "") => {
-        try {
-            const res = await postRequest('api/user/favorites', {
-                id,
-                type
-            });
-        } catch (ex) {
-            console.error(`${ex.message}`);
-        }
-    };
 
     return shows?.map((movie: IShow) => {
         const posterPath = movie.posterPath ? `https://image.tmdb.org/t/p/w185${movie.posterPath}` : "/images/default-movie.png"

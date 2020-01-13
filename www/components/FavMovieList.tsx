@@ -3,14 +3,16 @@ import { IShow } from '../../interfaces';
 import { trimStringBasedOnWords } from '../utils/index';
 
 type Props = {
-    movies: IShow[]
+    movies: IShow[],
+    removeShow: Function
 };
 
-const FavMovieList: React.FunctionComponent<Props> = ({ movies }) => {
+const FavMovieList: React.FunctionComponent<Props> = ({ movies, removeShow }) => {
     return (
         <>
             <h1>Favorite Movies</h1>
             <div className={"listContainer"}>
+                {movies.length === 0 && <p>No Favorite Movie</p>}
                 {movies?.map((movie: IShow) => (
                     <div key={movie.id} className="show">
                         <img src={`https://image.tmdb.org/t/p/w342${movie.backdropPath}`} alt={movie.title} />
@@ -31,7 +33,7 @@ const FavMovieList: React.FunctionComponent<Props> = ({ movies }) => {
                             </div>
 
                             <div className="actions">
-                                <button className="btnRemove">Remove</button>
+                                <button className="btnRemove" onClick={() => removeShow(movie.id)}>Remove</button>
                             </div>
                         </div>
                     </div>

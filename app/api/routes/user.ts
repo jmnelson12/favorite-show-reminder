@@ -12,6 +12,7 @@ export default (app: Router) => {
 
     route.get('/favorites', favCtrl.getFavorites);
     route.post('/favorites', favCtrl.postFavorite);
+    route.delete('/favorites/:id', favCtrl.removeFavorite);
 
     route.post('/register', userCtrl.register);
     route.get('/login', userCtrl.login);

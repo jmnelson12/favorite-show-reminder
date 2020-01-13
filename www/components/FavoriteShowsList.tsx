@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { IShow } from '../../interfaces';
-
+import { removeFromFavorites } from '../api/favorites';
 import FavTVList from "./FavTVList";
 import FavMovieList from './FavMovieList';
 
@@ -9,13 +9,23 @@ type Props = {
 };
 
 const FavoriteShowsList: React.FunctionComponent<Props> = ({ shows }) => {
-    const tvShows: IShow[] | null = shows?.filter((show: IShow) => show.type === "TV Show");
-    const movies: IShow[] | null = shows?.filter((show: IShow) => show.type === "Movie");
+    const [tvShows, setTvShows] = React.useState<IShow[] | null>(shows?.filter((show: IShow) => show.type === "TV Show"));
+    const [movies, setMovies] = React.useState<IShow[] | null>(shows?.filter((show: IShow) => show.type === "Movie"));
+
+    const removeShow = async (id: number) => {
+        const data = await removeFromFavorites(id);
+        const tvShows = data.filter((show: any) => show.type === "TV Show");
+        const movies = data.filter((show: any) => show.type === "Movie");
+
+        // figure this out... need to re-get show data to add to arrays
+
+        console.log({ data });
+    };
 
     return (
         <>
-            {tvShows && <FavTVList shows={tvShows} />}
-            {movies && <FavMovieList movies={movies} />}
+            {tvShows && <FavTVList shows={tvShows} removeShow={removeShow} />}
+            {movies && <FavMovieList movies={movies} removeShow={removeShow} />}
 
             <style jsx global>{`
                 .listContainer {

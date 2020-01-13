@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getTvShow, getMovie } from "./tmdb";
-import { ShowType } from '../../interfaces';
+import { ShowType, IShow } from '../../interfaces';
 
 let favorites: any[] = [];
 
@@ -32,5 +32,18 @@ export async function postFavorite(req: Request, res: Response) {
         }
     } else {
         res.status(501).json("Unable to add movie to favorites");
+    }
+}
+export async function removeFavorite(req: Request, res: Response) {
+    const id = Number(req.params.id);
+
+    if (id && inFavorites(id)) {
+        const newFavorites = favorites.filter((fav: IShow) => fav.id !== id);
+
+        favorites = newFavorites;
+
+        res.status(200).json(newFavorites);
+    } else {
+        res.status(400).json('Favorite not found');
     }
 }
