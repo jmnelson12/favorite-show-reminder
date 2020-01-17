@@ -14,12 +14,11 @@ const FavoriteShowsList: React.FunctionComponent<Props> = ({ shows }) => {
 
     const removeShow = async (id: number) => {
         const data = await removeFromFavorites(id);
-        const tvShows = data.filter((show: any) => show.type === "TV Show");
-        const movies = data.filter((show: any) => show.type === "Movie");
+        const newTVShows = data.filter((show: any) => show.type === "TV Show");
+        const newMovies = data.filter((show: any) => show.type === "Movie");
 
-        // figure this out... need to re-get show data to add to arrays
-
-        console.log({ data });
+        setTvShows(newTVShows);
+        setMovies(newMovies);
     };
 
     return (
@@ -52,6 +51,8 @@ const FavoriteShowsList: React.FunctionComponent<Props> = ({ shows }) => {
 
                 .show img {
                     width: 100%;
+                    max-height: 155px;
+                    object-fit: cover;
                 }
 
                 .details {

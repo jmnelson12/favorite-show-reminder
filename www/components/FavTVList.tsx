@@ -15,7 +15,11 @@ const FavTVList: React.FunctionComponent<Props> = ({ shows, removeShow }) => {
                 {shows.length === 0 && <p>No Favorite TV Shows</p>}
                 {shows?.map((show: IShow) => (
                     <div key={show.id} className="show">
-                        <img src={`https://image.tmdb.org/t/p/w342${show.backdropPath}`} alt={show.title} />
+                        <img
+                            src={`https://image.tmdb.org/t/p/w342${show.backdropPath}`}
+                            onError={(e: any) => e.target.src = "/images/default-movie.png"}
+                            alt={show.title}
+                        />
                         <div className="released">Released: {show.releaseDate}</div>
                         <h2 className="title">{show.title}</h2>
 
