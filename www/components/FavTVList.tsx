@@ -38,7 +38,7 @@ const FavTVList: React.FunctionComponent<Props> = ({ shows, removeShow }) => {
 
                             <div className="actions">
                                 <button className="btnRemove" onClick={() => removeShow(show.id)}>Remove</button>
-                                <button className="btnRemind">Remind Me</button>
+                                {/* <button className="btnRemind">Remind Me</button> */}
                             </div>
                         </div>
                     </div>

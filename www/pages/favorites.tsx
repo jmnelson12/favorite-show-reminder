@@ -33,7 +33,7 @@ Favorites.getInitialProps = async (context) => {
         const { data, status } = await getFavorites(context.req);
 
         if (status !== 200) {
-            Router.push('/auth');
+            Router.push('/');
             return { data: [] };
         }
 

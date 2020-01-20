@@ -3,7 +3,6 @@ import * as React from 'react';
 import { IShow } from "../../interfaces";
 import { getPopular, runSearch } from '../api/tmdb';
 import { scrollToRef } from "../utils";
-import { verify } from '../api/user';
 
 import MainLayout from "../components/MainLayout";
 import ShowsList from "../components/ShowsList";
@@ -290,8 +289,6 @@ const Index: NextPage<Props> = ({ shows }) => {
 Index.getInitialProps = async (context) => {
     try {
         const data = await getPopular(context.req);
-        // const isUser = await verify(context);
-        // console.log({ isUser });
 
         return { shows: data };
     } catch (ex) {

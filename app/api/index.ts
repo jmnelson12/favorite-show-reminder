@@ -5,9 +5,9 @@ import agendash from './routes/agendash';
 
 export default () => {
     const router = Router();
-    user(router);
     tmdb(router);
     agendash(router);
+    user(router);
 
     return router;
 };

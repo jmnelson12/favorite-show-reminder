@@ -7,16 +7,9 @@ export default async ({ server }: { server: express.Application }) => {
     const mongoConnection = await mongooseLoader();
     console.log('DB\'s loaded and connected...');
 
-    const userModel = {
-        name: 'userModel',
-        model: require('../models/User').default
-    };
 
     const { agenda } = await dependencyInjectorLoader({
-        mongoConnection,
-        models: [
-            userModel
-        ]
+        mongoConnection
     });
     console.log('Dependency Injector loaded... ');
 
