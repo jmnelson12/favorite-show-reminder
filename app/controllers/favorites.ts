@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { getTvShow, getMovie } from "./tmdb";
 import { ShowType, IShow } from '../../interfaces';
+import FavoriteModel from '../models/Favorite';
 
 let favorites: any[] = [];
 
@@ -9,6 +10,8 @@ const inFavorites = (id: number): boolean => {
 };
 
 export async function getFavorites(req: Request | null, res: Response | null) {
+    await setFavorites();
+
     const promises = favorites.map(fav => {
         if (fav.type === ShowType.TV_Show) {
             return getTvShow(fav.id);
@@ -25,12 +28,21 @@ export async function getFavorites(req: Request | null, res: Response | null) {
 };
 export async function postFavorite(req: Request, res: Response) {
     const { id, type } = req.body;
+    await setFavorites();
 
     if (id) {
         if (inFavorites(id)) {
             res.status(200).json("show already in favorites");
         } else {
-            favorites.push({ id, type });
+            const newFavorite = new FavoriteModel({
+                id,
+                type
+            });
+
+            newFavorite.save().catch(err => {
+                console.log(err);
+            });
+
             res.status(200).json("added movie to favorites");
         }
     } else {
@@ -39,8 +51,15 @@ export async function postFavorite(req: Request, res: Response) {
 }
 export async function removeFavorite(req: Request, res: Response) {
     const id = Number(req.params.id);
+    await setFavorites();
 
     if (id && inFavorites(id)) {
+        try {
+            await FavoriteModel.findOneAndDelete({ id });
+        } catch (e) {
+            console.log(e);
+        }
+
         const filteredFavorites = favorites.filter((fav: IShow) => fav.id !== id);
         favorites = filteredFavorites;
 
@@ -49,4 +68,9 @@ export async function removeFavorite(req: Request, res: Response) {
     } else {
         res.status(400).json('Favorite not found');
     }
+}
+
+async function setFavorites() {
+    const _favorites = await FavoriteModel.find({});
+    favorites = _favorites;
 }
