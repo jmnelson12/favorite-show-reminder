@@ -3,6 +3,7 @@ import { IShow } from '../../interfaces';
 import { removeFromFavorites } from '../api/favorites';
 import FavTVList from "./FavTVList";
 import FavMovieList from './FavMovieList';
+import { scrollToRef } from "../utils";
 
 type Props = {
     shows: any
@@ -11,19 +12,35 @@ type Props = {
 const FavoriteShowsList: React.FunctionComponent<Props> = ({ shows }) => {
     const [tvShows, setTvShows] = React.useState<IShow[] | null>(shows?.filter((show: IShow) => show.type === "TV Show"));
     const [movies, setMovies] = React.useState<IShow[] | null>(shows?.filter((show: IShow) => show.type === "Movie"));
+    const [error, setError] = React.useState<String>("");
+    const errorRefEl = React.useRef(null);
+
 
     const removeShow = async (id: number) => {
-        const data = await removeFromFavorites(id);
-        const newTVShows = data.filter((show: any) => show.type === "TV Show");
-        const newMovies = data.filter((show: any) => show.type === "Movie");
+        const password: string | null = prompt("Please enter password:", "");
+        const { data, status } = await removeFromFavorites(id, password);
 
-        setTvShows(newTVShows);
-        setMovies(newMovies);
+        if (status === 200) {
+            const newTVShows = data.filter((show: any) => show.type === "TV Show");
+            const newMovies = data.filter((show: any) => show.type === "Movie");
+
+            setTvShows(newTVShows);
+            setMovies(newMovies);
+            setError("");
+        } else {
+            setError("Not authorized to remove a favorite");
+            scrollToRef(errorRefEl);
+        }
     };
 
     return (
         <>
+            {
+                error && <p ref={errorRefEl} className="error">{error}</p>
+            }
             {tvShows && <FavTVList shows={tvShows} removeShow={removeShow} />}
+            <br />
+            <br />
             {movies && <FavMovieList movies={movies} removeShow={removeShow} />}
 
             <style jsx global>{`
@@ -33,6 +50,14 @@ const FavoriteShowsList: React.FunctionComponent<Props> = ({ shows }) => {
                     justify-content: center;
                     margin: 10px 0;
                 }
+                
+                .error {
+                    color: red;
+                    font-size: 18px;
+                    width: 100%;
+                    text-align: center;
+                    margin: 10px 0 15px;
+                }
 
                 h1 {
                     color: #FEFEFE;
@@ -41,8 +66,8 @@ const FavoriteShowsList: React.FunctionComponent<Props> = ({ shows }) => {
                 .show {
                     width: 20%;
                     min-width: 275px;
-                    max-width: 537px;
-                    margin: 15px 5px;
+                    max-width: 365px;
+                    margin: 15px;
                     color: #FEFEFE;
                     position: relative;
                     cursor: pointer;

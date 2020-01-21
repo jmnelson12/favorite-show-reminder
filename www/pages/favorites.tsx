@@ -15,12 +15,12 @@ const Favorites: NextPage<Props> = ({ data }) => (
             <FavoriteShowsList shows={data} />
             <style jsx>{`
                 .container {
-                    padding: 25px;
+                    padding: 25px 25px 185px;
                 }
 
                 @media screen and (max-width: 945px) {                    
                     .container {
-                        padding: 85px 30px;
+                        padding: 85px 30px 185px;
                     }
                 }
             `}</style>

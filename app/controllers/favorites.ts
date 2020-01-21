@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { getTvShow, getMovie } from "./tmdb";
 import { ShowType, IShow } from '../../interfaces';
 import FavoriteModel from '../models/Favorite';
+import config from '../config';
 
 let favorites: any[] = [];
 
@@ -51,22 +52,28 @@ export async function postFavorite(req: Request, res: Response) {
 }
 export async function removeFavorite(req: Request, res: Response) {
     const id = Number(req.params.id);
-    await setFavorites();
+    const password = req.query.password || req.headers.password || "";
 
-    if (id && inFavorites(id)) {
-        try {
-            await FavoriteModel.findOneAndDelete({ id });
-        } catch (e) {
-            console.log(e);
+    if (password === config.removePostPWORD) {
+        await setFavorites();
+
+        if (id && inFavorites(id)) {
+            try {
+                await FavoriteModel.findOneAndDelete({ id });
+            } catch (e) {
+                console.log(e);
+            }
+
+            const filteredFavorites = favorites.filter((fav: IShow) => fav.id !== id);
+            favorites = filteredFavorites;
+
+            const newFavorites = await getFavorites(null, null);
+            res.status(200).json(newFavorites);
+        } else {
+            res.status(400).json('Favorite not found');
         }
-
-        const filteredFavorites = favorites.filter((fav: IShow) => fav.id !== id);
-        favorites = filteredFavorites;
-
-        const newFavorites = await getFavorites(null, null);
-        res.status(200).json(newFavorites);
     } else {
-        res.status(400).json('Favorite not found');
+        res.status(500).json('Not authorized to remove a favorite');
     }
 }
 

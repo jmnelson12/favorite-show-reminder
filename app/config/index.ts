@@ -30,5 +30,6 @@ export default {
     agendash: {
         user: process.env.AGENDASH_USER || "admin",
         password: process.env.AGENDASH_PWORD || "password"
-    }
+    },
+    removePostPWORD: process.env.REMOVE_POST_PWORD
 }

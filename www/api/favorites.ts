@@ -18,12 +18,12 @@ export async function addToFavorites(id: number, type: string | undefined = "") 
     }
 };
 
-export async function removeFromFavorites(id: number) {
+export async function removeFromFavorites(id: number, password: string | null) {
     try {
-        const { data } = await deleteRequest(`${endpoint}/${id}`);
-        return data;
+        const { data, status } = await deleteRequest(`${endpoint}/${id}`, null, { headers: { password } });
+
+        return { data, status };
     } catch (ex) {
-        console.error(`${ex.message}`);
-        return null;
+        return { data: null, status: 400 };
     }
 }
