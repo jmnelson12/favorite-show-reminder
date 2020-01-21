@@ -33,6 +33,7 @@
         "AGENDASH_USER": "@agendash-user",
         "AGENDASH_PWORD": "@agendash-pword",
         "AGENDA_DB_COLLECTION": "@agenda-db-collection",
-        "AGENDA_CONCURRENCY": "@agenda-concurrency"
+        "AGENDA_CONCURRENCY": "@agenda-concurrency",
+        "REMOVE_POST_PWORD": "@remove-post-pword"
     }
 }
